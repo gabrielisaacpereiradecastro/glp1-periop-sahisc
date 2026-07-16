@@ -32,7 +32,7 @@
       "favicon": "./assets/favicon.png"
     },
     "experiments": {
-      "baseUrl": "/glp1-periop"
+      "baseUrl": "/glp1-periop-sahisc"
     },
     "plugins": [
       "expo-router",

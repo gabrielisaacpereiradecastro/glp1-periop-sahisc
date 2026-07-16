@@ -28,11 +28,11 @@ export default function Root({ children }: PropsWithChildren) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="GLP-1 PeriOp" />
-        <link rel="apple-touch-icon" href="/glp1-periop/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/glp1-periop-sahisc/apple-touch-icon.png" />
 
         {/* Android/Chrome: mesmo recurso de instalação (o favicon já é injetado
             automaticamente pelo Expo a partir de app.json) */}
-        <link rel="manifest" href="/glp1-periop/manifest.json" />
+        <link rel="manifest" href="/glp1-periop-sahisc/manifest.json" />
 
         <ScrollViewStyleReset />
       </head>
