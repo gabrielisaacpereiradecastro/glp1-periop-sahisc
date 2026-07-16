@@ -36,7 +36,7 @@ Caso esta política seja atualizada, a nova versão será publicada nesta mesma 
 
 ## 8. Contato
 
-Dúvidas sobre esta política ou sobre o aplicativo podem ser enviadas para o Serviço de Anestesiologia de São Carlos (SAHISC) pelo e-mail: **[preencher e-mail de contato do SAHISC]**.
+Dúvidas sobre esta política ou sobre o aplicativo podem ser enviadas para o Serviço de Anestesiologia de São Carlos (SAHISC) pelo e-mail: **atendimento@sahisc.com.br**.
 
 ---
 GLP-1 PeriOp — SAHISC · Baseado na Nota SBA C.SBA-01744/2026 (15/05/2026)
