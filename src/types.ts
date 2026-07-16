@@ -39,4 +39,11 @@ export interface Recomendacao {
   fatoresIdentificados: string[];
   usouEstratificacaoDeRisco: boolean;
   motivoIndeterminado?: string;
+  /**
+   * true quando a decisão é "suspender" mas a data de corte já passou — ou seja,
+   * não há mais tempo hábil para suspender o medicamento com segurança antes da
+   * cirurgia. Nesse caso a recomendação de data de corte não deve ser exibida;
+   * a UI deve mostrar a orientação de falha de suspensão em vez disso.
+   */
+  falhaJanelaSuspensao: boolean;
 }

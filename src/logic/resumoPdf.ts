@@ -25,22 +25,39 @@ export function gerarHtmlResumo(
     ? rotuloMedicamento(recomendacao.medicamento)
     : "Não identificado no protocolo";
   const manter = recomendacao.decisao === "manter";
+  const falhaJanela = recomendacao.falhaJanelaSuspensao;
 
-  const corDecisao = manter ? "#15803D" : "#B45309";
-  const fundoDecisao = manter ? "#DCFCE7" : "#FEF3C7";
-  const tituloDecisao = manter ? "Manter a dose habitual" : "Suspender o medicamento";
+  const corDecisao = manter ? "#15803D" : falhaJanela ? "#B91C1C" : "#B45309";
+  const fundoDecisao = manter ? "#DCFCE7" : falhaJanela ? "#FEE2E2" : "#FEF3C7";
+  const tituloDecisao = manter
+    ? "Manter a dose habitual"
+    : falhaJanela
+      ? "⚠️ Alerta de segurança — falha na suspensão de fármaco"
+      : "Suspender o medicamento";
+
+  const motivo =
+    respostas.pocusDisponivel !== "sim"
+      ? "Serviço sem disponibilidade confirmada de POCUS gástrico no dia da cirurgia."
+      : "Fatores de risco identificados na avaliação.";
 
   let corpoDecisao = "";
   if (manter) {
     corpoDecisao = `<p>Uso estável há 12 semanas ou mais, sem sintomas gastrointestinais e sem outros fatores de risco identificados, em serviço com disponibilidade de ultrassonografia gástrica (POCUS).</p>`;
+  } else if (falhaJanela) {
+    const dataCorte = recomendacao.dataCorteSuspensao
+      ? formatarDataExtenso(recomendacao.dataCorteSuspensao)
+      : "a definir";
+    corpoDecisao = `
+      <p>Este medicamento exige suspensão prévia de <strong>${recomendacao.diasSuspensao} dia${recomendacao.diasSuspensao === 1 ? "" : "s"}</strong> antes do procedimento — ou seja, o uso deveria ter sido suspenso a partir de <strong>${dataCorte}</strong>. Por não cumprir esse intervalo, adote a seguinte conduta:</p>
+      <p><strong>Cirurgias eletivas:</strong> devem ser suspensas e reagendadas após o cumprimento do prazo de segurança.</p>
+      <p><strong>Cirurgias de urgência ou emergência:</strong> realize POCUS gástrico à beira-leito para avaliar o conteúdo antral, e adote rigorosamente o protocolo institucional de estômago cheio (intubação em sequência rápida).</p>
+      <p>Motivo da suspensão indicada: ${motivo}</p>
+      <p><strong>Envolver a equipe de Endocrinologia</strong> para ajuste do tratamento durante o período de suspensão, prevenindo hiperglicemia.</p>
+    `;
   } else {
     const dataCorte = recomendacao.dataCorteSuspensao
       ? formatarDataExtenso(recomendacao.dataCorteSuspensao)
       : "a definir";
-    const motivo =
-      respostas.pocusDisponivel !== "sim"
-        ? "Serviço sem disponibilidade confirmada de POCUS gástrico no dia da cirurgia."
-        : "Fatores de risco identificados na avaliação.";
     corpoDecisao = `
       <p><strong>Não usar o medicamento a partir de ${dataCorte}</strong> — suspensão de ${recomendacao.diasSuspensao} dia${recomendacao.diasSuspensao === 1 ? "" : "s"} antes da cirurgia.</p>
       <p>Motivo: ${motivo}</p>

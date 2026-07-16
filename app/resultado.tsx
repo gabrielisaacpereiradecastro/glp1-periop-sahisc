@@ -71,13 +71,28 @@ export default function TelaResultado() {
   }
 
   const manter = recomendacao.decisao === "manter";
+  const falhaJanela = recomendacao.falhaJanelaSuspensao;
+
+  const estiloCartaoDecisao = manter
+    ? estilos.cartaoSucesso
+    : falhaJanela
+      ? estilos.cartaoPerigo
+      : estilos.cartaoAlerta;
+  const estiloTituloDecisao = manter
+    ? estilos.tituloSucesso
+    : falhaJanela
+      ? estilos.tituloPerigo
+      : estilos.tituloAlerta;
+  const tituloDecisao = manter
+    ? "Manter a dose habitual"
+    : falhaJanela
+      ? "⚠️ Alerta de segurança — Falha na suspensão de fármaco"
+      : "Suspender o medicamento";
 
   return (
     <ScrollView contentContainerStyle={estilos.container}>
-      <Cartao style={manter ? estilos.cartaoSucesso : estilos.cartaoAlerta}>
-        <Text style={manter ? estilos.tituloSucesso : estilos.tituloAlerta}>
-          {manter ? "Manter a dose habitual" : "Suspender o medicamento"}
-        </Text>
+      <Cartao style={estiloCartaoDecisao}>
+        <Text style={estiloTituloDecisao}>{tituloDecisao}</Text>
         {recomendacao.medicamento && (
           <Text style={estilos.textoDecisao}>
             Medicamento: {rotuloMedicamento(recomendacao.medicamento)}
@@ -89,6 +104,31 @@ export default function TelaResultado() {
             fatores de risco identificados, em serviço com disponibilidade de
             ultrassonografia gástrica (POCUS). Pode manter a dose habitual do medicamento.
           </Text>
+        ) : falhaJanela ? (
+          <>
+            <Text style={estilos.textoDecisao}>
+              Este medicamento exige suspensão prévia de {recomendacao.diasSuspensao} dia
+              {recomendacao.diasSuspensao === 1 ? "" : "s"} antes do procedimento — ou seja,
+              o uso deveria ter sido suspenso a partir de{" "}
+              <Text style={estilos.destaque}>
+                {recomendacao.dataCorteSuspensao &&
+                  formatarDataExtenso(recomendacao.dataCorteSuspensao)}
+              </Text>
+              . Por não cumprir esse intervalo, adote a seguinte conduta:
+            </Text>
+            <Text style={[estilos.textoDecisao, estilos.destaque]}>Cirurgias eletivas:</Text>
+            <Text style={estilos.textoDecisao}>
+              Devem ser suspensas e reagendadas após o cumprimento do prazo de segurança.
+            </Text>
+            <Text style={[estilos.textoDecisao, estilos.destaque, { marginTop: espacamento.sm }]}>
+              Cirurgias de urgência ou emergência:
+            </Text>
+            <Text style={estilos.textoDecisao}>
+              Realize POCUS gástrico à beira-leito para avaliar o conteúdo antral, e adote
+              rigorosamente o protocolo institucional de estômago cheio (intubação em
+              sequência rápida).
+            </Text>
+          </>
         ) : (
           <>
             {recomendacao.dataCorteSuspensao && (
@@ -101,6 +141,10 @@ export default function TelaResultado() {
                 {recomendacao.diasSuspensao === 1 ? "" : "s"} antes da cirurgia.
               </Text>
             )}
+          </>
+        )}
+        {!manter && (
+          <>
             <Text style={estilos.textoDecisao}>
               {respostas.pocusDisponivel !== "sim"
                 ? "Motivo: o serviço não tem disponibilidade confirmada de ultrassonografia gástrica (POCUS) no dia da cirurgia, então a conduta mais segura é suspender o medicamento."
