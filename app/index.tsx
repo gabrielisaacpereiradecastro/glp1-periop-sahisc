@@ -27,8 +27,16 @@ export default function TelaInicial() {
   return (
     <ScrollView contentContainerStyle={estilos.container}>
       <View style={estilos.cabecalho}>
-        <Text style={estilos.titulo}>GLP-1 PeriOp</Text>
-        <Text style={estilos.marca}>SAHISC</Text>
+        <Image
+          source={require("../assets/sahisc-mark.png")}
+          style={estilos.iconeCabecalho}
+          resizeMode="contain"
+          accessibilityLabel="Símbolo do SAHISC"
+        />
+        <View>
+          <Text style={estilos.titulo}>GLP-1 PeriOp</Text>
+          <Text style={estilos.marca}>SAHISC</Text>
+        </View>
       </View>
       <Text style={estilos.subtitulo}>
         Responda algumas perguntas rápidas para saber quando suspender o uso do
@@ -84,7 +92,13 @@ const estilos = StyleSheet.create({
     gap: espacamento.lg,
   },
   cabecalho: {
-    gap: espacamento.xs,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: espacamento.md,
+  },
+  iconeCabecalho: {
+    width: 56,
+    height: 56,
   },
   titulo: {
     fontSize: 26,
