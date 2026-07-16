@@ -2,22 +2,29 @@
   "expo": {
     "name": "GLP-1 PeriOp — SAHISC",
     "slug": "glp1-perioperatorio",
+    "owner": "trictracxliv",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "glp1perioperatorio",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "icon": "./assets/icon.png",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/deb39f0e-d2ab-433d-9914-423b2a2f3d04"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.seudominio.glp1perioperatorio"
+      "bundleIdentifier": "br.com.sahisc.glp1periop"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#CCFBF1"
       },
-      "package": "com.seudominio.glp1perioperatorio"
+      "package": "br.com.sahisc.glp1periop"
     },
     "web": {
       "bundler": "metro",
@@ -27,6 +34,12 @@
     "plugins": [
       "expo-router",
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "deb39f0e-d2ab-433d-9914-423b2a2f3d04"
+      }
+    }
   }
 }
