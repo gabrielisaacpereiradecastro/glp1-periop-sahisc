@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest",
-    "deploy:web": "expo export -p web && rm -rf docs/_expo docs/assets docs/icons docs/questionario && cp -r dist/. docs/ && echo 'Pronto — agora é só: git add docs && git commit -m \"Atualiza versão web\" && git push'"
+    "deploy:web": "expo export -p web && rm -rf docs/_expo docs/assets docs/icons docs/questionario && cp -r dist/. docs/ && touch docs/.nojekyll && echo 'Pronto — agora é só: git add docs && git commit -m \"Atualiza versão web\" && git push'"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
