@@ -47,10 +47,14 @@ export function gerarHtmlResumo(
     const dataCorte = recomendacao.dataCorteSuspensao
       ? formatarDataExtenso(recomendacao.dataCorteSuspensao)
       : "a definir";
+    const condutaUrgencia =
+      respostas.pocusDisponivel === "sim"
+        ? "realize POCUS gástrico à beira-leito para avaliar o conteúdo antral, e reavalie a conduta com base no resultado."
+        : "como este serviço não tem disponibilidade confirmada de POCUS gástrico, presuma estômago cheio e adote via aérea protegida (intubação em sequência rápida com manobra de Sellick).";
     corpoDecisao = `
       <p>Este medicamento exige suspensão prévia de <strong>${recomendacao.diasSuspensao} dia${recomendacao.diasSuspensao === 1 ? "" : "s"}</strong> antes do procedimento — ou seja, o uso deveria ter sido suspenso a partir de <strong>${dataCorte}</strong>. Por não cumprir esse intervalo, adote a seguinte conduta:</p>
       <p><strong>Cirurgias eletivas:</strong> devem ser suspensas e reagendadas após o cumprimento do prazo de segurança.</p>
-      <p><strong>Cirurgias de urgência ou emergência:</strong> realize POCUS gástrico à beira-leito para avaliar o conteúdo antral, e adote rigorosamente o protocolo institucional de estômago cheio (intubação em sequência rápida).</p>
+      <p><strong>Cirurgias de urgência ou emergência:</strong> ${condutaUrgencia}</p>
       <p>Motivo da suspensão indicada: ${motivo}</p>
       <p><strong>Envolver a equipe de Endocrinologia</strong> para ajuste do tratamento durante o período de suspensão, prevenindo hiperglicemia.</p>
     `;

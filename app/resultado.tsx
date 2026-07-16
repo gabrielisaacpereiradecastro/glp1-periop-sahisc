@@ -133,9 +133,9 @@ export default function TelaResultado() {
               Cirurgias de urgência ou emergência:
             </Text>
             <Text style={estilos.textoDecisao}>
-              Realize POCUS gástrico à beira-leito para avaliar o conteúdo antral, e adote
-              rigorosamente o protocolo institucional de estômago cheio (intubação em
-              sequência rápida).
+              {respostas.pocusDisponivel === "sim"
+                ? "Realize POCUS gástrico à beira-leito para avaliar o conteúdo antral, e reavalie a conduta com base no resultado."
+                : "Como este serviço não tem disponibilidade confirmada de POCUS gástrico, presuma estômago cheio e adote via aérea protegida (intubação em sequência rápida com manobra de Sellick)."}
             </Text>
           </>
         ) : (
@@ -201,20 +201,18 @@ export default function TelaResultado() {
       <Cartao>
         <Text style={estilos.tituloCartao}>No dia da cirurgia</Text>
         <Text style={estilos.textoInformativo}>
-          Se disponível, a equipe de anestesia pode realizar uma ultrassonografia gástrica
-          (POCUS) para confirmar se o estômago está vazio antes da indução anestésica. Caso
-          seja identificado risco aumentado, a equipe pode adotar medidas adicionais de
-          segurança ou considerar adiar a cirurgia. Essa avaliação é feita pela equipe
-          médica no momento do procedimento e não é calculada por este aplicativo.
+          {respostas.pocusDisponivel === "sim"
+            ? "A equipe de anestesia pode realizar uma ultrassonografia gástrica (POCUS) para confirmar se o estômago está vazio antes da indução anestésica. Caso seja identificado risco aumentado, a equipe pode adotar medidas adicionais de segurança ou considerar adiar a cirurgia. Essa avaliação é feita pela equipe médica no momento do procedimento e não é calculada por este aplicativo."
+            : "Como este serviço não tem disponibilidade confirmada de POCUS gástrico, a equipe de anestesia deve presumir risco aumentado de conteúdo gástrico residual, sem contar com essa confirmação por imagem. A decisão sobre medidas adicionais de segurança ou adiamento é tomada pela equipe médica no momento do procedimento e não é calculada por este aplicativo."}
         </Text>
       </Cartao>
 
       <Cartao style={estilos.cartaoAlerta}>
         <Text style={estilos.tituloAlerta}>Se o estômago for de alto risco</Text>
         <Text style={[estilos.textoInformativo, { marginBottom: espacamento.sm }]}>
-          Referência rápida do fluxograma para a equipe, caso o POCUS mostre estômago cheio
-          ou o preparo pré-operatório não tenha sido cumprido. Não é calculado a partir das
-          suas respostas — depende do achado do dia.
+          {respostas.pocusDisponivel === "sim"
+            ? "Referência rápida do fluxograma para a equipe, caso o POCUS mostre estômago cheio ou o preparo pré-operatório não tenha sido cumprido. Não é calculado a partir das suas respostas — depende do achado do dia."
+            : "Referência rápida do fluxograma para a equipe. Como este serviço não tem POCUS disponível, vale presumir estômago cheio caso haja qualquer suspeita clínica ou o preparo pré-operatório não tenha sido cumprido. Não é calculado a partir das suas respostas — depende da avaliação clínica do dia."}
         </Text>
         <Text style={estilos.subtituloCartao}>Intraoperatório</Text>
         <Text style={estilos.itemLista}>
