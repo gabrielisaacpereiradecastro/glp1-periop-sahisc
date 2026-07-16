@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Alert, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
@@ -37,6 +37,15 @@ export default function TelaResultado() {
     setGerandoPdf(true);
     try {
       const html = gerarHtmlResumo(respostas, recomendacao, nomePaciente);
+
+      if (Platform.OS === "web") {
+        // Na web não há "compartilhar" nativo nem geração de arquivo local:
+        // abrimos o diálogo de impressão do navegador, de onde a pessoa
+        // escolhe "Salvar como PDF" (ou "Salvar em Arquivos", no Safari).
+        await Print.printAsync({ html });
+        return;
+      }
+
       const { uri } = await Print.printToFileAsync({ html, base64: false });
       if (await Sharing.isAvailableAsync()) {
         await Sharing.shareAsync(uri, {
@@ -265,6 +274,11 @@ export default function TelaResultado() {
           onPress={baixarPdf}
           desabilitado={gerandoPdf}
         />
+        {Platform.OS === "web" && (
+          <Text style={[estilos.textoInformativo, { marginTop: espacamento.sm }]}>
+            Vai abrir o diálogo de impressão do navegador — escolha "Salvar como PDF".
+          </Text>
+        )}
       </Cartao>
 
       <Botao titulo="Ver bibliografia completa" onPress={() => router.push("/bibliografia")} />

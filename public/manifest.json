@@ -1,0 +1,22 @@
+{
+  "name": "GLP-1 PeriOp — SAHISC",
+  "short_name": "GLP-1 PeriOp",
+  "description": "Apoio à decisão sobre manejo perioperatório de GLP-1/GIP, baseado na Nota SBA C.SBA-01744/2026.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0F766E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

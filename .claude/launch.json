@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web-preview-test",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8734", "--directory", "/tmp/preview-root"],
+      "port": 8734
+    }
+  ]
+}
