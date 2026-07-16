@@ -1,0 +1,136 @@
+import React, { useState } from "react";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { Cartao } from "@/components/Cartao";
+import { Botao } from "@/components/Botao";
+import { Checklist } from "@/components/Checklist";
+import { useQuestionario } from "@/state/QuestionarioContext";
+import { cores, espacamento } from "@/theme";
+
+const TERMO_ACEITE = [
+  {
+    id: "aceite",
+    descricao:
+      "Li e entendi que este aplicativo não substitui a avaliação individualizada do médico anestesiologista responsável, e que as recomendações seguem exclusivamente o protocolo carregado no aplicativo.",
+  },
+];
+
+export default function TelaInicial() {
+  const { reiniciar } = useQuestionario();
+  const [aceitou, setAceitou] = useState(false);
+
+  function comecar() {
+    reiniciar();
+    router.push("/questionario/medicamento");
+  }
+
+  return (
+    <ScrollView contentContainerStyle={estilos.container}>
+      <View style={estilos.cabecalho}>
+        <Text style={estilos.titulo}>GLP-1 PeriOp</Text>
+        <Text style={estilos.marca}>SAHISC</Text>
+      </View>
+      <Text style={estilos.subtitulo}>
+        Responda algumas perguntas rápidas para saber quando suspender o uso do
+        medicamento e como proceder com jejum e dieta antes da cirurgia.
+      </Text>
+
+      <Cartao style={estilos.avisoCartao}>
+        <Text style={estilos.avisoTexto}>
+          Este aplicativo segue exclusivamente a Nota da Sociedade Brasileira de
+          Anestesiologia (SBA) C.SBA-01744/2026, de 15/05/2026. Ele não substitui a
+          avaliação individualizada do médico anestesiologista responsável pelo caso.
+        </Text>
+      </Cartao>
+
+      <Cartao style={estilos.privacidadeCartao}>
+        <Text style={estilos.privacidadeTexto}>
+          O aplicativo funciona 100% localmente, no seu aparelho. Nenhuma informação
+          digitada aqui é enviada, salva em servidor ou compartilhada — os dados só saem
+          do celular se você mesmo escolher gerar e enviar o PDF resumo.
+        </Text>
+      </Cartao>
+
+      <Checklist
+        itens={TERMO_ACEITE}
+        selecionados={aceitou ? ["aceite"] : []}
+        onAlternar={() => setAceitou((atual) => !atual)}
+      />
+
+      <Botao titulo="Começar" onPress={comecar} desabilitado={!aceitou} />
+
+      <Botao
+        titulo="Consultar bibliografia"
+        variante="secundario"
+        onPress={() => router.push("/bibliografia")}
+      />
+
+      <View style={estilos.rodape}>
+        <Text style={estilos.rodapeTexto}>Desenvolvido por</Text>
+        <Image
+          source={require("../assets/sahisc-logo.png")}
+          style={estilos.rodapeLogo}
+          resizeMode="contain"
+          accessibilityLabel="Logotipo do SAHISC, Serviço de Anestesiologia de São Carlos"
+        />
+      </View>
+    </ScrollView>
+  );
+}
+
+const estilos = StyleSheet.create({
+  container: {
+    padding: espacamento.lg,
+    gap: espacamento.lg,
+  },
+  cabecalho: {
+    gap: espacamento.xs,
+  },
+  titulo: {
+    fontSize: 26,
+    fontWeight: "800",
+    color: cores.texto,
+  },
+  marca: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: cores.primaria,
+    letterSpacing: 1,
+  },
+  subtitulo: {
+    fontSize: 15,
+    color: cores.textoSecundario,
+    lineHeight: 22,
+  },
+  avisoCartao: {
+    backgroundColor: cores.alertaFundo,
+    borderColor: cores.alerta,
+  },
+  avisoTexto: {
+    color: "#78350F",
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  privacidadeCartao: {
+    backgroundColor: cores.primariaClara,
+    borderColor: cores.primaria,
+  },
+  privacidadeTexto: {
+    color: cores.primariaEscura,
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  rodape: {
+    alignItems: "center",
+    marginTop: espacamento.sm,
+  },
+  rodapeTexto: {
+    fontSize: 11,
+    color: cores.textoSecundario,
+    marginBottom: espacamento.xs,
+  },
+  rodapeLogo: {
+    width: 90,
+    height: 110,
+  },
+});

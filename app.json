@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "GLP-1 PeriOp — SAHISC",
+    "slug": "glp1-perioperatorio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "glp1perioperatorio",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.seudominio.glp1perioperatorio"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#CCFBF1"
+      },
+      "package": "com.seudominio.glp1perioperatorio"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-asset"
+    ]
+  }
+}
