@@ -37,8 +37,8 @@ export default function TelaSintomasRisco() {
     <ScrollView contentContainerStyle={estilos.container}>
       <Cartao>
         <Text style={estilos.pergunta}>
-          Você tem atualmente algum destes sintomas: náusea, vômito, refluxo, sensação de
-          estômago cheio (empachamento), distensão abdominal ou dispepsia?
+          O paciente tem atualmente algum destes sintomas: náusea, vômito, refluxo,
+          sensação de estômago cheio (empachamento), distensão abdominal ou dispepsia?
         </Text>
         <SeletorOpcoes
           opcoes={[

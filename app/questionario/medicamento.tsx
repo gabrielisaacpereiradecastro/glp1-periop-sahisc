@@ -20,7 +20,7 @@ export default function TelaMedicamento() {
 
   return (
     <ScrollView contentContainerStyle={estilos.container}>
-      <Text style={estilos.pergunta}>Qual medicamento você utiliza?</Text>
+      <Text style={estilos.pergunta}>Qual medicamento o paciente utiliza?</Text>
       <View style={estilos.listaMedicamentos} accessibilityRole="radiogroup">
         {MEDICAMENTOS.map((m) => {
           const ativo = respostas.medicamentoId === m.id;
@@ -65,7 +65,7 @@ export default function TelaMedicamento() {
         <>
           <Cartao>
             <Text style={estilos.perguntaCartao}>
-              Há quanto tempo você usa esse medicamento?
+              Há quanto tempo o paciente usa esse medicamento?
             </Text>
             <SeletorOpcoes
               opcoes={[
